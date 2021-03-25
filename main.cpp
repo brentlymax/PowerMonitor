@@ -48,6 +48,7 @@ void RecordPowerState(PowerMonitor& pMonitor)
 		cout << "Error opening file." << endl;
 		return;
 	}
+
 	// Loops endlessly, recording the current time and watts used by the CPU.
 	while (true) {
 		double watts = 0;
@@ -73,6 +74,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout << "Error: Intel Power Gadget library not found. Make sure it is installed and the program is running in the correct architecture." << endl;
 		return -1;
 	}
+
 	int choice = 0;
 	cout << "Welcome to the CPU Power Monitor." << endl;
 	cout << "Press '1' to choose the CPU Power Sampler." << endl;
@@ -86,22 +88,26 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout << "Welcome to the CPU Power Sampler." << endl;
 		cout << "Please choose a sample size." << endl;
 		cin >> n;
+
 		while (n < 1) {
 			cout << "Error: sample size must be 1 or more." << endl;
 			cout << "Please choose a sample size." << endl;
 			cin >> n;
 		}
+
 		cout << "Number of samples is: " << n << endl;
 		cout << "Sampling now..." << endl;
 		SamplePowerState(n, pMonitor);
+	}
 	// CPU Power Recorder - samples endlessly and records Watts of each sample with a time stamp.
-	} else if (choice == 2) {
+	else if (choice == 2) {
 		cout << "Welcome to the CPU Power Recorder." << endl;
 		cout << "Press Ctrl + C to stop recording." << endl;
 		cout << "Recording now..." << endl;
 		RecordPowerState(pMonitor);
+	}
 	// User decides to quit.
-	} else {
+	else {
 		cout << "You chose to quit. Goodbye." << endl;
 	}
 	return 0;
